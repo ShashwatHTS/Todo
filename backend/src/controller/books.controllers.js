@@ -1,7 +1,6 @@
 require('dotenv').config()
 const books = require("../db/books.db")
 const { createClient } = require('@supabase/supabase-js');
-
 const { supabaseUrl, supabaseKey } = require('../db/books.db')
 
 const supabase = createClient(supabaseUrl, supabaseKey)
@@ -45,30 +44,8 @@ exports.getBookById = async (req, res, next) => {
   res.send(data)
 }
 
-// function generateRandomID() {
-//   const randomNum = Math.random();
-//   const randomString = randomNum.toString().substr(2, 4)
-//   const result = parseInt(randomString, 10)
-//   return result
-// }
-
-// exports.createBook = function (req, res, next) {
-//   // create a book
-//   let newBook = req.body
-//   newBook.id = generateRandomID()
-//   // newBook.name = req.body.name
-//   books.push(newBook)
-//   console.log(books)
-//   res.send(newBook)
-// }
-
 exports.updateBook = async (req, res, next) => {
   // update a book
-  // let result = books.find(book => book.id == req.params.id)
-  // if (!result) return res.status(404).send("Book not found")
-  // result.name = req.body.name
-  // res.send(result)
-
   try {
     let data = await supabase.from('todo').select("*")
       .eq('id', req.params.id)
@@ -106,5 +83,4 @@ exports.deleteBook = async (req, res, next) => {
   } catch (error) {
     console.error(error);
   }
-
 }
