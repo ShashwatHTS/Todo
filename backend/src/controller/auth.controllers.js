@@ -23,7 +23,7 @@ exports.getData = async (req, res) => {
 
 exports.getRegistered = async (req, res) => {
   try {
-    const { username, email, password } = req.body
+    const { username, email, role } = req.body
     const { data, error } = await supabase.auth.signUp(req.body)
     // console.log("w => ", data);
     if (data?.user) {
@@ -35,6 +35,16 @@ exports.getRegistered = async (req, res) => {
         console.log("userResponse => ", userResponse)
         res.send(userResponse.data)
 
+      } else {
+        console.log("error")
+      }
+
+      const role_status = await supabase.
+        from('user_info')
+        .insert({ register_id: userResponse.data[0].id, username: username, user_role: role })
+      if (role_status) {
+        console.log("userResponse => ", userResponse)
+        res.send(role_status)
       } else {
         console.log("error")
       }
@@ -62,6 +72,7 @@ exports.logInUser = async (req, res) => {
       .update({ active: true })
       .eq('auth_id', data.user.id)
       .select();
+
 
     if (userResponse) {
       console.log("userResponse => ", userResponse)
