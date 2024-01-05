@@ -2,7 +2,7 @@ require('dotenv').config()
 const books = require("../db/books.db")
 const { createClient } = require('@supabase/supabase-js');
 const { supabaseUrl, supabaseKey } = require('../db/books.db')
-
+const logger = require('../index');
 const supabase = createClient(supabaseUrl, supabaseKey)
 
 exports.getData = async (req, res) => {
@@ -15,7 +15,8 @@ exports.getData = async (req, res) => {
     return;
   }
   // console.log(data);
-  res.send(data)
+  res.json(data)
+  
 }
 
 exports.createBook = async (req, res) => {
@@ -31,10 +32,10 @@ exports.createBook = async (req, res) => {
       return;
     }
     // console.log(data);
-    res.send(data)
+    res.json(data)
   } catch (error) {
     console.error(error);
-    res.status(500).send('Error posting data to Supabase');
+    res.status(500).json('Error posting data to Supabase');
   }
 }
 
@@ -42,9 +43,9 @@ exports.getBookById = async (req, res, next) => {
   // find a book by id
   let { data, error } = await supabase.from('todo').select("*")
     .eq('id', req.params.id)
-  console.log("show", data)
+  // console.log("show", data)
   if (!data) {
-    return res.status(404).send("Book not found")
+    return res.status(404).json("Book not found")
   }
   if (error) {
     console.log(error)
@@ -58,7 +59,7 @@ exports.updateBook = async (req, res, next) => {
   try {
     let { data, error } = await supabase.from('todo').select("*")
       .eq('id', req.params.id)
-    console.log("show", data)
+    // console.log("show", data)
     if (!data) {
       return res.status(404).send("Book not found")
     }
@@ -70,7 +71,7 @@ exports.updateBook = async (req, res, next) => {
         .update(req.body)
         .eq('id', req.params.id)
         .select()
-      res.send(data.data)
+      res.json(data.data)
     }
   } catch (error) {
     console.error(error);
@@ -82,7 +83,7 @@ exports.deleteBook = async (req, res, next) => {
   try {
     let { data, error } = await supabase.from('todo').select("*")
       .eq('id', req.params.id)
-    console.log("show", data)
+    // console.log("show", data)
     if (!data) {
       return res.status(404).send("Book not found")
     }
@@ -93,7 +94,7 @@ exports.deleteBook = async (req, res, next) => {
         .from('todo')
         .delete()
         .eq('id', req.params.id)
-      res.send("delete successfully")
+      res.json("delete successfully")
     }
 
   } catch (error) {
@@ -119,7 +120,7 @@ exports.addToCart = async (req, res, next) => {
       .eq('id', req.params.id)
       .select()
     console.log(data.data);
-    res.send(data)
+    res.json(data)
   } catch (error) {
     console.error(error);
   }
@@ -135,5 +136,5 @@ exports.getCartData = async (req, res) => {
     return;
   }
   // console.log(data);
-  res.send(data)
+  res.json(data)
 }
