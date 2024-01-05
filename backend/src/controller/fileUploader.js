@@ -50,7 +50,7 @@ async function uploadArrayBufferToSupabase(arrayBuffer, destinationPath) {
     console.log(arrayBuffer)
     const data = await supabase
         .storage
-        .from('avatars') // Replace with your storage bucket name
+        .from('FileOfImages') // Replace with your storage bucket name
         .upload(destinationPath, arrayBuffer)
         .then(response => {
             console.log(`File uploaded successfully: ${response.data}`);
@@ -96,17 +96,17 @@ exports.readFileAsArrayBuffer = async () => {
     const filepathforImage = await latestlistOfImage();
     console.log("kuch mila",filepathforImage)
     let filePath = ''
-    for (let i = 0; i < 1; i++) {
-        filePath = `./wallpaper/${filepathforImage[i]}`
+    for (const fileItem of filepathforImage) {
+        filePath = `./wallpaper/${fileItem}`
         console.log("filePath --> ", filePath)
         // let filePath = './wallpaper/image1.jpg';
-        let destinationPath = filepathforImage[i];
+        let destinationPath = fileItem;
         try {
             const fileData = fs.readFileSync(filePath);
             // console.log("fileData --> ", fileData)
             const arrayBuffer = Buffer.from(fileData).buffer;
             // console.log("arrayBuffer --> ", arrayBuffer)
-            uploadArrayBufferToSupabase(arrayBuffer, destinationPath);
+            await uploadArrayBufferToSupabase(arrayBuffer, destinationPath);
         } catch (error) {
             console.error('Error reading file:', error);
         }
@@ -114,4 +114,4 @@ exports.readFileAsArrayBuffer = async () => {
 }
 
 
-// cron.schedule("08 * * 1", readFileAsArrayBuffer); 
+cron.schedule("08 * * 1", readFileAsArrayBuffer); 
