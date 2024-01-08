@@ -8,6 +8,7 @@ const path = require('path');
 const multer = require("multer");
 const upload = multer();
 const cron = require("node-cron")
+const fsPromises = require("fs/promises")
 
 // Upload images to Supabase
 
@@ -47,10 +48,10 @@ function getImagesFromFolder(folderPath) {
 
 
 async function uploadArrayBufferToSupabase(arrayBuffer, destinationPath) {
-    console.log(arrayBuffer)
-    const data = await supabase
+    // console.log(arrayBuffer)
+    await supabase
         .storage
-        .from('FileOfImages') // Replace with your storage bucket name
+        .from('FileOfImages') 
         .upload(destinationPath, arrayBuffer)
         .then(response => {
             console.log(`File uploaded successfully: ${response.data}`);
@@ -58,10 +59,8 @@ async function uploadArrayBufferToSupabase(arrayBuffer, destinationPath) {
         .catch(error => {
             console.error(`Error uploading file: ${error.message}`);
         });
-        console.log("completed")
 }
-const latestlistOfImage = () => {
-    let fpath = "./wallpaper"
+const latestlistOfImage = (fpath) => {
     const listOfImage = getImagesFromFolder(fpath)
         .then(imageFiles => {
             // console.log('List of image files:', imageFiles);
@@ -71,8 +70,6 @@ const latestlistOfImage = () => {
             console.error('Error reading image files:', error);
         });
     return listOfImage
-    // console.log(listOfImage)
-
 }
 function getImagesFromFolder(folderPath) {
     return new Promise((resolve, reject) => {
@@ -81,37 +78,39 @@ function getImagesFromFolder(folderPath) {
                 reject(err);
                 return;
             }
-
             const imageFiles = files.filter(file => {
                 const extname = path.extname(file).toLowerCase();
-                return ['.png', '.jpg', '.jpeg', '.gif', '.bmp'].includes(extname);
+                return ['.png', '.jpg', '.jpeg', '.gif', '.bmp','.log','.txt'].includes(extname);
             });
-
             resolve(imageFiles);
         });
     });
 }
 
 exports.readFileAsArrayBuffer = async () => {
-    const filepathforImage = await latestlistOfImage();
-    console.log("kuch mila",filepathforImage)
+    let imagesPath = "./wallpaper"
+    const filepathforImage = await latestlistOfImage(imagesPath);
     let filePath = ''
     for (const fileItem of filepathforImage) {
         filePath = `./wallpaper/${fileItem}`
-        console.log("filePath --> ", filePath)
-        // let filePath = './wallpaper/image1.jpg';
         let destinationPath = fileItem;
         try {
             const fileData = fs.readFileSync(filePath);
-            // console.log("fileData --> ", fileData)
             const arrayBuffer = Buffer.from(fileData).buffer;
-            // console.log("arrayBuffer --> ", arrayBuffer)
             await uploadArrayBufferToSupabase(arrayBuffer, destinationPath);
         } catch (error) {
             console.error('Error reading file:', error);
         }
     }
+    fs.readdir(imagesPath, (err, files) => {
+        if (err) throw err;
+        for (const file of files) {
+            fs.unlink(path.join(imagesPath, file), (err) => {
+                if (err) throw err;
+            });
+        }
+    });
 }
 
 
-cron.schedule("08 * * 1", readFileAsArrayBuffer); 
+// cron.schedule("08 * * 1", readFileAsArrayBuffer); 
