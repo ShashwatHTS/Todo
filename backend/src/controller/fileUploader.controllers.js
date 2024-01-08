@@ -89,9 +89,9 @@ function getImagesFromFolder(folderPath) {
 
 exports.readFileAsArrayBuffer = async () => {
     let imagesPath = "./wallpaper"
-    const filepathforImage = await latestlistOfImage(imagesPath);
+    const filePathForImage = await latestlistOfImage(imagesPath);
     let filePath = ''
-    for (const fileItem of filepathforImage) {
+    for (const fileItem of filePathForImage) {
         filePath = `./wallpaper/${fileItem}`
         let destinationPath = fileItem;
         try {
