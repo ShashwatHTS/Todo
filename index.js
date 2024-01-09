@@ -748,3 +748,34 @@ console.log(person123);
 console.log(Object.keys(person123));
 
 
+const settings = {
+    username: 'lydiahallie',
+    level: 19,
+    health: 90,
+};
+
+const data123 = JSON.stringify(settings, ['level', 'health']);
+console.log(data123);
+
+
+let num123 = 10;
+
+const increaseNumber = () => num123++;
+const increasePassedNumber = number => number++;
+
+const num1 = increaseNumber();
+const num21 = increasePassedNumber(num1);
+
+console.log(num1);
+console.log(num2);
+
+const value = { number: 10 };
+
+const multiply = (x = { ...value }) => {
+    console.log((x.number *= 2));
+};
+
+multiply();
+multiply();
+multiply(value);
+multiply(value);
