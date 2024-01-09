@@ -163,16 +163,16 @@ isNaN([1, 2, 3]) // true: conversion fails
 // console.table({foo:'bar', baz:'qux'})
 
 var personArr = [
-  {
-    name: 'John',
-    age: 30,
-    city: 'New York'
-  },
-  {
-    name: 'John',
-    age: 30,
-    city: 'New York'
-  }
+    {
+        name: 'John',
+        age: 30,
+        city: 'New York'
+    },
+    {
+        name: 'John',
+        age: 30,
+        city: 'New York'
+    }
 ]
 
 // console.table(personArr,['name','city'])
@@ -194,9 +194,9 @@ var fn1 = function myfn() { };
 // console.count(Number);
 
 var myObject = {
-  "foo": {
-    "bar": "data"
-  }
+    "foo": {
+        "bar": "data"
+    }
 };
 // console.dir(myObject);
 
@@ -209,149 +209,149 @@ console.log('hello')
 
 
 const data = [
-  {
-    id: 1,
-    title: "The Lord of the Rings",
-    publicationDate: "1954-07-29",
-    author: "J. R. R. Tolkien",
-    genres: [
-      "fantasy",
-      "high-fantasy",
-      "adventure",
-      "fiction",
-      "novels",
-      "literature",
-    ],
-    hasMovieAdaptation: true,
-    pages: 1216,
-    translations: {
-      spanish: "El señor de los anillos",
-      chinese: "魔戒",
-      french: "Le Seigneur des anneaux",
+    {
+        id: 1,
+        title: "The Lord of the Rings",
+        publicationDate: "1954-07-29",
+        author: "J. R. R. Tolkien",
+        genres: [
+            "fantasy",
+            "high-fantasy",
+            "adventure",
+            "fiction",
+            "novels",
+            "literature",
+        ],
+        hasMovieAdaptation: true,
+        pages: 1216,
+        translations: {
+            spanish: "El señor de los anillos",
+            chinese: "魔戒",
+            french: "Le Seigneur des anneaux",
+        },
+        reviews: {
+            goodreads: {
+                rating: 4.52,
+                ratingsCount: 630994,
+                reviewsCount: 13417,
+            },
+            librarything: {
+                rating: 4.53,
+                ratingsCount: 47166,
+                reviewsCount: 452,
+            },
+        },
     },
-    reviews: {
-      goodreads: {
-        rating: 4.52,
-        ratingsCount: 630994,
-        reviewsCount: 13417,
-      },
-      librarything: {
-        rating: 4.53,
-        ratingsCount: 47166,
-        reviewsCount: 452,
-      },
+    {
+        id: 2,
+        title: "The Cyberiad",
+        publicationDate: "1965-01-01",
+        author: "Stanislaw Lem",
+        genres: [
+            "science fiction",
+            "humor",
+            "speculative fiction",
+            "short stories",
+            "fantasy",
+        ],
+        hasMovieAdaptation: false,
+        pages: 295,
+        translations: {},
+        reviews: {
+            goodreads: {
+                rating: 4.16,
+                ratingsCount: 11663,
+                reviewsCount: 812,
+            },
+            librarything: {
+                rating: 4.13,
+                ratingsCount: 2434,
+                reviewsCount: 0,
+            },
+        },
     },
-  },
-  {
-    id: 2,
-    title: "The Cyberiad",
-    publicationDate: "1965-01-01",
-    author: "Stanislaw Lem",
-    genres: [
-      "science fiction",
-      "humor",
-      "speculative fiction",
-      "short stories",
-      "fantasy",
-    ],
-    hasMovieAdaptation: false,
-    pages: 295,
-    translations: {},
-    reviews: {
-      goodreads: {
-        rating: 4.16,
-        ratingsCount: 11663,
-        reviewsCount: 812,
-      },
-      librarything: {
-        rating: 4.13,
-        ratingsCount: 2434,
-        reviewsCount: 0,
-      },
+    {
+        id: 3,
+        title: "Dune",
+        publicationDate: "1965-01-01",
+        author: "Frank Herbert",
+        genres: ["science fiction", "novel", "adventure"],
+        hasMovieAdaptation: false,
+        pages: 658,
+        translations: {
+            spanish: "",
+        },
+        reviews: {
+            goodreads: {
+                rating: 4.25,
+                ratingsCount: 1142893,
+                reviewsCount: 49701,
+            },
+        },
     },
-  },
-  {
-    id: 3,
-    title: "Dune",
-    publicationDate: "1965-01-01",
-    author: "Frank Herbert",
-    genres: ["science fiction", "novel", "adventure"],
-    hasMovieAdaptation: false,
-    pages: 658,
-    translations: {
-      spanish: "",
+    {
+        id: 4,
+        title: "Harry Potter and the Philosopher's Stone",
+        publicationDate: "1997-06-26",
+        author: "J. K. Rowling",
+        genres: ["fantasy", "adventure"],
+        hasMovieAdaptation: true,
+        pages: 223,
+        translations: {
+            spanish: "Harry Potter y la piedra filosofal",
+            korean: "해리 포터와 마법사의 돌",
+            bengali: "হ্যারি পটার এন্ড দ্য ফিলোসফার্স স্টোন",
+            portuguese: "Harry Potter e a Pedra Filosofal",
+        },
+        reviews: {
+            goodreads: {
+                rating: 4.47,
+                ratingsCount: 8910059,
+                reviewsCount: 140625,
+            },
+            librarything: {
+                rating: 4.29,
+                ratingsCount: 120941,
+                reviewsCount: 1960,
+            },
+        },
     },
-    reviews: {
-      goodreads: {
-        rating: 4.25,
-        ratingsCount: 1142893,
-        reviewsCount: 49701,
-      },
+    {
+        id: 5,
+        title: "A Game of Thrones",
+        publicationDate: "1996-08-01",
+        author: "George R. R. Martin",
+        genres: ["fantasy", "high-fantasy", "novel", "fantasy fiction"],
+        hasMovieAdaptation: true,
+        pages: 835,
+        translations: {
+            korean: "왕좌의 게임",
+            polish: "Gra o tron",
+            portuguese: "A Guerra dos Tronos",
+            spanish: "Juego de tronos",
+        },
+        reviews: {
+            goodreads: {
+                rating: 4.44,
+                ratingsCount: 2295233,
+                reviewsCount: 59058,
+            },
+            librarything: {
+                rating: 4.36,
+                ratingsCount: 38358,
+                reviewsCount: 1095,
+            },
+        },
     },
-  },
-  {
-    id: 4,
-    title: "Harry Potter and the Philosopher's Stone",
-    publicationDate: "1997-06-26",
-    author: "J. K. Rowling",
-    genres: ["fantasy", "adventure"],
-    hasMovieAdaptation: true,
-    pages: 223,
-    translations: {
-      spanish: "Harry Potter y la piedra filosofal",
-      korean: "해리 포터와 마법사의 돌",
-      bengali: "হ্যারি পটার এন্ড দ্য ফিলোসফার্স স্টোন",
-      portuguese: "Harry Potter e a Pedra Filosofal",
-    },
-    reviews: {
-      goodreads: {
-        rating: 4.47,
-        ratingsCount: 8910059,
-        reviewsCount: 140625,
-      },
-      librarything: {
-        rating: 4.29,
-        ratingsCount: 120941,
-        reviewsCount: 1960,
-      },
-    },
-  },
-  {
-    id: 5,
-    title: "A Game of Thrones",
-    publicationDate: "1996-08-01",
-    author: "George R. R. Martin",
-    genres: ["fantasy", "high-fantasy", "novel", "fantasy fiction"],
-    hasMovieAdaptation: true,
-    pages: 835,
-    translations: {
-      korean: "왕좌의 게임",
-      polish: "Gra o tron",
-      portuguese: "A Guerra dos Tronos",
-      spanish: "Juego de tronos",
-    },
-    reviews: {
-      goodreads: {
-        rating: 4.44,
-        ratingsCount: 2295233,
-        reviewsCount: 59058,
-      },
-      librarything: {
-        rating: 4.36,
-        ratingsCount: 38358,
-        reviewsCount: 1095,
-      },
-    },
-  },
 ];
 
 
 function getBooks() {
-  return data;
+    return data;
 }
 
 function getBook(id) {
-  return data.find((d) => d.id === id)
+    return data.find((d) => d.id === id)
 }
 
 // console.log(getBook(1))
@@ -417,32 +417,32 @@ sorted
 // todos
 
 class Rectangle {
-  constructor(height, width) {
-      this.height = height;
-      this.width = width;
-  }
+    constructor(height, width) {
+        this.height = height;
+        this.width = width;
+    }
 
-  // Getter
-  get area() {
-      return this.calcArea();
-  }
-  // Method
-  calcArea() {
-      return this.height * this.width;
-  }
+    // Getter
+    get area() {
+        return this.calcArea();
+    }
+    // Method
+    calcArea() {
+        return this.height * this.width;
+    }
 }
 
 const square = new Rectangle(20, 30);
 
-console.log(square.area); 
+console.log(square.area);
 
 
-function main(){
-  console.log('A');
-  setTimeout(
-      function print(){ console.log('B'); }
-      ,0);
-  console.log('C');
+function main() {
+    console.log('A');
+    setTimeout(
+        function print() { console.log('B'); }
+        , 0);
+    console.log('C');
 }
 main();
 
@@ -450,18 +450,18 @@ main();
 console.log(0.1 + 0.2 === 0.3);
 
 function User(name, age) {
-  this.name = name;
-  this.age = age;
+    this.name = name;
+    this.age = age;
 
-  this.getProfile = function() {
-      // Outer function context
-      console.log(this.constructor.name); // User
-      return () => {
-          // Inner function context
-          console.log(this.constructor.name); 
-          console.log("I'm " + this.name + ", " + this.age + " yrs old");
-      };
-  }
+    this.getProfile = function () {
+        // Outer function context
+        console.log(this.constructor.name); // User
+        return () => {
+            // Inner function context
+            console.log(this.constructor.name);
+            console.log("I'm " + this.name + ", " + this.age + " yrs old");
+        };
+    }
 }
 
 let user = new User('John', 25);
@@ -469,17 +469,17 @@ let profile = user.getProfile();
 console.log(profile);
 
 function User1(name, age) {
-  this.name = name;
-  this.age = age;
+    this.name = name;
+    this.age = age;
 
-  this.getProfile = function() {
-      // Outer function context
-      console.log(this.constructor.name); // User
-      return function() {
-          console.log(this.constructor.name); 
-          console.log("I'm " + this.name + ", " + this.age + " yrs old");
-      };
-  }
+    this.getProfile = function () {
+        // Outer function context
+        console.log(this.constructor.name); // User
+        return function () {
+            console.log(this.constructor.name);
+            console.log("I'm " + this.name + ", " + this.age + " yrs old");
+        };
+    }
 }
 
 var user1 = new User1('John', 25);
@@ -488,7 +488,7 @@ console.log(profile1)
 profile(); //I'm undefined, undefined yrs old
 
 var y = 1;
-if (function f(){}) {
+if (function f() { }) {
     y += typeof f;
 }
 console.log(y);
@@ -506,10 +506,10 @@ console.log(car);
 
 
 function sayHi() {
-  console.log(name);
-  console.log(age);
-  var name = 'Lydia';
-  let age = 21;
+    console.log(name);
+    console.log(age);
+    var name = 'Lydia';
+    let age = 21;
 }
 
 // sayHi();
@@ -552,21 +552,21 @@ console.log(b === cs);
 
 
 class Chameleon {
-  static colorChange(newColor) {
-    this.newColor = newColor;
-    return this.newColor;
-  }
+    static colorChange(newColor) {
+        this.newColor = newColor;
+        return this.newColor;
+    }
 
-  constructor({ newColor = 'green' } = {}) {
-    this.newColor = newColor;
-  }
+    constructor({ newColor = 'green' } = {}) {
+        this.newColor = newColor;
+    }
 }
 
 const freddie = new Chameleon({ newColor: 'purple' });
 // console.log(freddie.colorChange('orange'));  // freddie.colorChange() is not a function
 
 let greeting;
-greetign = {}; 
+greetign = {};
 // console.log(greetign);   // {}
 
 
@@ -653,4 +653,98 @@ greetign = {};
 // }
 
 // console.log(typeof sayHi());   // number
+
+// [1, 2, 3].map(num => {
+//     if (typeof num === 'number') return;
+//     console.log(num * 2);
+//   });
+
+
+function getInfo(member, year) {
+    member.name = 'Lydia';
+    year = '1998';
+}
+
+const person = { name: 'Sarah' };
+const birthYear = '1997';
+
+getInfo(person, birthYear);
+
+console.log(person, birthYear);
+
+
+function greeting1() {
+    throw 'Hello world!';
+}
+
+function sayHi() {
+    try {
+        const data = greeting1();
+        console.log('It worked!', data);
+    } catch (e) {
+        console.log('Oh no an error:', e);
+    }
+}
+sayHi();
+
+
+
+function Car() {
+    this.make = 'Lamborghini';
+    return { make: 'Maserati' };
+}
+
+const myCar = new Car();
+console.log(myCar.make);
+
+class Dog {
+    constructor(name) {
+        this.name = name;
+    }
+}
+
+Dog.prototype.bark = function () {
+    console.log(`Woof I am ${this.name}`);
+};
+
+const pet = new Dog('Mara');
+
+pet.bark();
+
+delete Dog.prototype.bark;
+
+// pet.bark(); // pet.bark is not a function
+
+
+const set = new Set([1, 1, 2, 3, 4]);
+
+console.log(set);
+
+const name = 'Lydia';
+age = 21;
+
+console.log(delete name);
+console.log(name)
+console.log(delete age);
+// console.log(age)
+
+
+const numbers = [1, 2, 3, 4, 5];
+const [yab] = numbers;
+
+console.log(yab);
+
+const user123 = { name: 'Lydia', age: 21 };
+const admin = { admin: true, ...user123 };
+
+console.log(admin);
+
+
+const person123 = { name: 'Lydia' };
+
+Object.defineProperty(person123, 'age', { value: 21 });
+
+console.log(person123);
+console.log(Object.keys(person123));
+
 
