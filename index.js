@@ -779,3 +779,120 @@ multiply();
 multiply();
 multiply(value);
 multiply(value);
+
+
+async function* range(start, end) {
+    for (let i = start; i <= end; i++) {
+        yield Promise.resolve(i);
+    }
+}
+
+(async () => {
+    const gen = range(1, 3);
+    for await (const item of gen) {
+        console.log(item);
+    }
+})();
+
+const myFunc = ({ x, y, z }) => {
+    console.log(x, y, z);
+};
+
+myFunc(1, 2, 3);
+
+
+const spookyItems = ['👻', '🎃', '🕸'];
+({ item: spookyItems[3] } = { item: '💀' });
+
+console.log(spookyItems);
+
+const name1234 = 'Lydia Hallie';
+const age123 = 21;
+
+console.log(Number.isNaN(name1234));
+console.log(Number.isNaN(age123));
+
+console.log(isNaN(name1234));
+console.log(isNaN(age123));
+
+const randomValue = 21;
+
+function getInfo() {
+    //   console.log(typeof randomValue);  //Cannot access 'randomValue' before initialization
+    const randomValue = 'Lydia Hallie';
+}
+
+// getInfo();
+
+
+class Counter {
+    constructor() {
+        this.count = 0;
+    }
+
+    increment() {
+        this.count++;
+    }
+}
+
+const counterOne = new Counter();
+counterOne.increment();
+counterOne.increment();
+console.log(counterOne)
+const counterTwo = counterOne;
+counterTwo.increment();
+
+console.log(counterOne.count);
+
+
+const handler = {
+    set: () => console.log('Added a new property!'),
+    get: () => console.log('Accessed a property!'),
+};
+
+const person2 = new Proxy({}, handler);
+
+person2.name = 'Lydia';
+person2.name;
+console.log(person2.name);
+
+
+const person21 = { name: 'Lydia Hallie' };
+
+console.log(Object.seal(person21));
+console.log(person21);
+
+const teams = [
+    { name: 'Team 1', members: ['Paul', 'Lisa'] },
+    { name: 'Team 2', members: ['Laura', 'Tim'] },
+];
+
+function* getMembers(members) {
+    for (let i = 0; i < members.length; i++) {
+        yield members[i];
+    }
+}
+
+function* getTeams(teams) {
+    for (let i = 0; i < teams.length; i++) {
+        // ✨ SOMETHING IS MISSING HERE ✨
+        yield* getMembers(teams[i].members)
+    }
+}
+
+const obj = getTeams(teams);
+obj.next(); // { value: "Paul", done: false }
+obj.next(); // { value: "Lisa", done: false }
+
+
+let count = 0;
+const numss = [0, 1, 2, 3];
+
+numss.forEach(num => {
+    if (num) count += 1
+})
+
+console.log(count)
+
+
+
