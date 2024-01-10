@@ -1028,3 +1028,119 @@ export default function Todos() {
 }
 
 */
+
+
+
+
+
+function* getMembers(members) {
+    let a = 2
+    yield a
+    yield a
+    yield a
+    yield a + 4
+}
+
+let i1 = getMembers([1, 2, 3])
+console.log(i1.next())
+console.log(i1.next())
+console.log(i1.next())
+console.log(i1.next())
+
+
+
+// counter app in react js using redux toolkit
+
+// App.js file
+
+/*
+
+import React from "react";
+import { Provider } from "react-redux";
+import { createStore } from "redux";
+import Counter from "./Counter";
+import counterReducer from "./counte";
+
+// Create the Redux store
+const store = createStore(counterReducer);
+
+const App = () => {
+  return (
+    <Provider store={store}>
+      <div>
+        <Counter />
+      </div>
+    </Provider>
+  );
+};
+
+export default App;
+*/
+
+// Count.js file
+
+/*
+// counter.js
+
+// Action types
+const INCREMENT = "INCREMENT";
+const DECREMENT = "DECREMENT";
+
+// Action creators
+export const increment = () => ({ type: INCREMENT });
+export const decrement = () => ({ type: DECREMENT });
+
+// Initial state
+const initialState = {
+  count: 0,
+};
+
+// Reducer
+const counterReducer = (state = initialState, action) => {
+  switch (action.type) {
+    case INCREMENT:
+      return { count: state.count + 1 };
+    case DECREMENT:
+      return { count: state.count - 1 };
+    default:
+      return state;
+  }
+};
+
+export default counterReducer;
+
+*/
+
+
+// Counter.js file
+
+/*
+// Counter.js
+
+import React from "react";
+import { connect } from "react-redux";
+import { increment, decrement } from "./counte";
+
+const Counter = ({ count, increment, decrement }) => {
+  return (
+    <div>
+      <h1>Counter: {count}</h1>
+      <button onClick={increment}>Increment</button>
+      <button onClick={decrement}>Decrement</button>
+    </div>
+  );
+};
+
+// Connect the component to the Redux store
+const mapStateToProps = (state) => ({
+  count: state.count,
+});
+
+const mapDispatchToProps = {
+  increment,
+  decrement,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Counter);
+
+*/
