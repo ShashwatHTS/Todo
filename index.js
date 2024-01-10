@@ -437,14 +437,14 @@ const square = new Rectangle(20, 30);
 console.log(square.area);
 
 
-function main() {
-    console.log('A');
-    setTimeout(
-        function print() { console.log('B'); }
-        , 0);
-    console.log('C');
-}
-main();
+// function main() {
+//     console.log('A');
+//     setTimeout(
+//         function print() { console.log('B'); }
+//         , 0);
+//     console.log('C');
+// }
+// main();
 
 
 console.log(0.1 + 0.2 === 0.3);
@@ -781,18 +781,18 @@ multiply(value);
 multiply(value);
 
 
-async function* range(start, end) {
-    for (let i = start; i <= end; i++) {
-        yield Promise.resolve(i);
-    }
-}
+// async function* range(start, end) {
+//     for (let i = start; i <= end; i++) {
+//         yield Promise.resolve(i);
+//     }
+// }
 
-(async () => {
-    const gen = range(1, 3);
-    for await (const item of gen) {
-        console.log(item);
-    }
-})();
+// (async () => {
+//     const gen = range(1, 3);
+//     for await (const item of gen) {
+//         console.log(item);
+//     }
+// })();
 
 const myFunc = ({ x, y, z }) => {
     console.log(x, y, z);
@@ -896,3 +896,135 @@ console.log(count)
 
 
 
+
+const shashwat = [{
+    name: 'shashwat',
+    age: 21,
+    address: 'kathmandu',
+    phone: 1234567890
+}, {
+    name: 'Arnav',
+    age: 25,
+    address: 'pune',
+    phone: 0987654321
+}]
+
+for (let index = 0; index < shashwat.length; index++) {
+    const element = shashwat[index].name;
+    console.log(element)  // shashwat , Arnav
+}
+
+
+const myObject1 = {
+    js: 'javascript',
+    cpp: 'C++',
+    rb: "ruby",
+    swift: "swift by apple"
+}
+
+for (const key in myObject1) {
+    console.log(`${key} key ::-> value ${myObject1[key]}`);
+    console.log(myObject1[key]);
+}
+
+// console.log(myObject1.values());
+
+
+const myCoding = [
+    {
+        languageName: "javascript",
+        languageFileName: "js"
+    },
+    {
+        languageName: "java",
+        languageFileName: "java"
+    },
+    {
+        languageName: "python",
+        languageFileName: "py"
+    },
+]
+
+myCoding.forEach((item) => {
+    console.log(item.languageName);
+})
+
+
+const abdul = {
+    name: 'abdul',
+    age: 21,
+    address: 'kathmandu',
+    phone: 1234567890
+}
+
+console.log(Object.keys(abdul))
+
+console.log(Object.values(abdul))
+console.log(Object.entries(abdul))
+
+delete abdul.phone
+
+console.log(abdul)
+
+
+
+
+
+
+// using useReducer in React
+/*
+import { useReducer } from "react";
+
+const initialTodos = [
+  {
+    id: 1,
+    title: "Todo 1",
+    complete: false,
+  },
+  {
+    id: 2,
+    title: "Todo 2",
+    complete: false,
+  },
+];
+
+const reducer = (state, action) => {
+  switch (action.type) {
+    case "COMPLETE":
+      return state.map((todo) => {
+        if (todo.id === action.id) {
+          return { ...todo, complete: !todo.complete };
+        } else {
+          return todo;
+        }
+      });
+    default:
+      return state;
+  }
+};
+
+export default function Todos() {
+  const [todos, dispatch] = useReducer(reducer, initialTodos);
+
+  const handleComplete = (todo) => {
+    dispatch({ type: "COMPLETE", id: todo.id });
+  };
+  return (
+    <>
+      {todos.map((todo) => (
+        <div key={todo.id}>
+          <label htmlFor="">
+            <input
+              type="checkbox"
+              checked={todo.complete}
+              onChange={() => handleComplete(todo)}
+            />
+            {todo.title}
+          </label>
+        </div>
+      ))}
+    </>
+  );
+}
+
+*/
