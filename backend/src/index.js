@@ -51,6 +51,7 @@ app.use("/api/v1/auth", require("./routes/auth.routes.js"))
 
 app.use("/api/v1/images", require("./routes/imageUpload.routes.js"))
 
+
 app.listen(port, () => console.log(`app listening on port ${port}!`))
 
 module.exports = app

@@ -2,7 +2,7 @@ require('dotenv').config()
 
 const { createClient } = require('@supabase/supabase-js');
 const { supabaseUrl, supabaseKey } = require('../db/books.db')
-
+const bcrypt = require('bcrypt');
 const supabase = createClient(supabaseUrl, supabaseKey)
 
 
@@ -23,13 +23,20 @@ exports.getData = async (req, res) => {
 
 exports.getRegistered = async (req, res) => {
   try {
-    const { username, email, role } = req.body
+
+    const { username, email, role, password } = req.body
+    const hash_password = await bcrypt.hash(password, 10)
+
+    // const decrypt_password = await bcrypt .compare(password, hash_password)
+    // console.log("Decrypted password:", decrypt_password)
+
+
     const { data, error } = await supabase.auth.signUp(req.body)
     // console.log("w => ", data);
     if (data?.user) {
-      console.log("data=>", data.user.id)
+      console.log("data=>", data.user)
 
-      const userResponse = await supabase.from('register').insert({ auth_id: data.user.id, email, username }).select();
+      const userResponse = await supabase.from('register').insert({ auth_id: data.user.id, email, username, password: hash_password }).select();
 
       if (userResponse) {
         console.log("userResponse => ", userResponse)
@@ -61,18 +68,26 @@ exports.getRegistered = async (req, res) => {
 exports.logInUser = async (req, res) => {
   const { username, email, password } = req.body;
 
+  const decrypt_password = await supabase
+    .from("register").select("password").eq("username", username)
+  // console.log("verifyPassword => ", verifyPassword?.data[0].password)
+
+  const verifyPassword = await bcrypt.compare(password, decrypt_password?.data[0].password)
+
   //login user using supabase
+  if (!verifyPassword) {
+    res.send("invalid user")
+  }
   const { data, error } = await supabase.auth.signInWithPassword({ username, email, password });
   // console.log(data)
-  console.log("w => ", data);
+  // console.log("w => ", data);
   if (data?.user) {
-    console.log("data=>", data.user.id)
+    // console.log("data=>", data?.user.id)
     const userResponse = await supabase
       .from('register')
-      .update({ active: true })
-      .eq('auth_id', data.user.id)
+      .select("*")
+      .eq('auth_id', data?.user.id)
       .select();
-
 
     if (userResponse) {
       console.log("userResponse => ", userResponse)
@@ -82,8 +97,8 @@ exports.logInUser = async (req, res) => {
     console.log(error)
     res.send("invalid name/email or password")
   }
-
 }
+
 
 exports.logOutUser = async (req, res) => {
   const userResponse = await supabase
