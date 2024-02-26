@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 
-const baseURL = "http://localhost:3000/api/v1/books/"; 
+const baseURL = "http://localhost:3000/api/v1/books/";
 
 // const baseURL = "https://jsonplaceholder.typicode.com/posts";
 
@@ -10,7 +10,13 @@ function App() {
   const [post, setPost] = useState([]);
   const [name, setName] = useState("");
   const [editName, setEditName] = useState("");
+  const [count, setCount] = useState(0);
 
+  // const calculation = useMemo(() => {
+  //   setCount((count) => count + 1);
+  // }, []);
+
+  // console.log({ post });
   const fetchData = async () => {
     try {
       const response = await axios.get(baseURL);
@@ -30,12 +36,14 @@ function App() {
       const postResponse = await axios.post(`${baseURL}/create`, {
         name,
       });
-      console.log(postResponse);
+      setPost([...post, postResponse.data[0]]);
+      console.log({ data: postResponse.data[0] });
+
       setName("");
     } catch (error) {
       console.log(error);
     }
-    fetchData();
+    setCount(count+1)
   };
 
   const handleEditClick = (editName) => {
@@ -51,15 +59,17 @@ function App() {
       const data = await axios.put(`${baseURL}/update/${id}`, {
         name: editName?.name,
       });
-
+      // setEditName("");
+      setPost(post.map((p) => (p.id === id ? { ...p, ...data.data[0] } : p)));
       console.log(data);
+      setCount(count+1)
 
       setEditName({});
       // Reset editName state
     } catch (error) {
       console.log(error);
     }
-    fetchData();
+    // fetchData();
   };
 
   const handleDelete = async (id) => {
@@ -75,6 +85,7 @@ function App() {
   return (
     <>
       <div className="py-4 flex">
+      <h1>calculation :  {count}</h1>
         <h1 className="text-3xl font-bold underline">Hello world!</h1>
 
         <form onSubmit={handleSubmit}>

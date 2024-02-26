@@ -2,48 +2,13 @@ require('dotenv').config()
 const { createClient } = require('@supabase/supabase-js');
 const { supabaseUrl, supabaseKey } = require('../db/books.db')
 const supabase = createClient(supabaseUrl, supabaseKey)
-const axios = require('axios');
 const fs = require('fs');
 const path = require('path');
-const multer = require("multer");
-const upload = multer();
-const cron = require("node-cron")
-const fsPromises = require("fs/promises")
+const moment = require("moment");
+const today = moment();
 
 // Upload images to Supabase
 
-const storageBucket = 'FileOfImages';
-const file = '../../wallpaper';
-
-
-function getImagesFromFolder(folderPath) {
-    return new Promise((resolve, reject) => {
-        fs.readdir(folderPath, (err, files) => {
-            if (err) {
-                reject(err);
-                return;
-            }
-
-            const imageFiles = files.filter(file => {
-                const extname = path.extname(file).toLowerCase();
-                return ['.png', '.jpg', '.jpeg', '.gif', '.bmp'].includes(extname);
-            });
-
-            resolve(imageFiles);
-        });
-    });
-}
-// let fpath = "./backend/wallpaper"
-// const listOfImage = getImagesFromFolder(fpath)
-//     .then(imageFiles => {
-//         console.log('List of image files:', imageFiles);
-//     })
-//     .catch(error => {
-//         console.error('Error file path list of image reading image files:', error);
-//     });
-
-
-// console.log(listOfImage)
 
 
 
@@ -51,7 +16,7 @@ async function uploadArrayBufferToSupabase(arrayBuffer, destinationPath) {
     // console.log(arrayBuffer)
     await supabase
         .storage
-        .from('FileOfImages') 
+        .from('FileOfImages')
         .upload(destinationPath, arrayBuffer)
         .then(response => {
             console.log(`File uploaded successfully: ${response.data}`);
@@ -80,7 +45,7 @@ function getImagesFromFolder(folderPath) {
             }
             const imageFiles = files.filter(file => {
                 const extname = path.extname(file).toLowerCase();
-                return ['.png', '.jpg', '.jpeg', '.gif', '.bmp','.log','.txt'].includes(extname);
+                return ['.png', '.jpg', '.jpeg', '.gif', '.bmp', '.log', '.txt'].includes(extname);
             });
             resolve(imageFiles);
         });
@@ -89,28 +54,58 @@ function getImagesFromFolder(folderPath) {
 
 exports.readFileAsArrayBuffer = async () => {
     let imagesPath = "./wallpaper"
-    const filePathForImage = await latestlistOfImage(imagesPath);
-    let filePath = ''
-    for (const fileItem of filePathForImage) {
-        filePath = `./wallpaper/${fileItem}`
-        let destinationPath = fileItem;
-        try {
-            const fileData = fs.readFileSync(filePath);
-            const arrayBuffer = Buffer.from(fileData).buffer;
-            await uploadArrayBufferToSupabase(arrayBuffer, destinationPath);
-        } catch (error) {
-            console.error('Error reading file:', error);
+    const lastWeekDates = getLastWeekDates();
+    try {
+        const filePathForImage = await latestlistOfImage(imagesPath);
+        let filePath = ''
+        for (const fileItem of filePathForImage) {
+            filePath = `./wallpaper/${fileItem}`
+            if (lastWeekDates.includes(fileItem)) {
+                let destinationPath = fileItem;
+                try {
+                    const fileData = fs.readFileSync(filePath);
+                    const arrayBuffer = Buffer.from(fileData).buffer;
+                    await uploadArrayBufferToSupabase(arrayBuffer, destinationPath);
+                } catch (error) {
+                    console.error('Error reading file:', error);
+                }
+            }
         }
+        removeFileFromFolder(imagesPath, lastWeekDates);
+        // lastWeekDates = 0
+
+    } catch (error) {
+        console.log(error)
     }
+    return;
+}
+
+function removeFileFromFolder(imagesPath, lastWeekDates) {
     fs.readdir(imagesPath, (err, files) => {
         if (err) throw err;
         for (const file of files) {
-            fs.unlink(path.join(imagesPath, file), (err) => {
-                if (err) throw err;
-            });
+            if (lastWeekDates.includes(file)) {
+                fs.unlink(path.join(imagesPath, file), (err) => {
+                    if (err) throw err;
+                    console.log(`${file} was deleted`);
+                });
+            }
         }
     });
 }
+function getLastWeekDates() {
+    const lastWeekStartDate = today.clone().subtract(1, 'week').startOf('week');
+    const lastWeekDates = [];
+    for (let i = 0; i < 7; i++) {
+        const date = lastWeekStartDate.clone().add(i, 'days');
+        lastWeekDates.push(`log__${date.format('YYYY-MM-DD')}.log`);
+    }
+    return lastWeekDates;
+}
 
 
-// cron.schedule("08 * * 1", readFileAsArrayBuffer); 
+// Define the cron expression
+// const cronExpression = '8 * * 0-6';
+
+// Schedule the cron job
+// cron.schedule(cronExpression, readFileAsArrayBuffer);

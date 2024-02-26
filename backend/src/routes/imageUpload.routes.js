@@ -7,7 +7,7 @@ const { uploadAllImages, uploadFile, uploadFileToSupabase, readFileAsArrayBuffer
 
 // const {uploadFile} = require('../../../index.js')
 
-router.post('/', upload.single('file'), readFileAsArrayBuffer);
+router.post('/', readFileAsArrayBuffer);
 
 
 module.exports = router;
